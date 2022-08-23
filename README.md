@@ -1,7 +1,8 @@
-# poundry • 
+<img align="right" width="150" height="150" top="100" src="medusa.jpg">
 
-A Poorly opinionated template for working with novel concepts in forge/foundry.
-Note: The contents of this template will change often, avoid use in prod.
+# Medusa • 
+
+Beware the UnVirtuous wallets that dare pass her gaze.
 
 ## Installing Foundry
 You will need foundry installed to run forge
