@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
+import "lib/murky/src/Merkle.sol";
 
 contract Medusa {
     address owner;
     uint256 root;
     uint256 head;
+    Merkle merkle;
 
     mapping(address => uint256) web; //Map address to CID
     // mapping(uint256 => uint256) dag; //Map dag root to top CID
@@ -14,6 +16,7 @@ contract Medusa {
     constructor(){
         owner = msg.sender;
         root = 0;
+        Merkle = new Merkle();
     }
 
 // state changers
