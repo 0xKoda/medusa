@@ -3,46 +3,54 @@ pragma solidity ^0.8.13;
 import "lib/murky/src/Merkle.sol";
 
 contract Medusa {
+    Snakes snakes;
+    struct Snakes {
+    bytes32 root;
+    bytes32 head;
+    }
     address owner;
-    uint256 root;
-    uint256 head;
     Merkle merkle;
+    uint256 nonce;
 
     mapping(address => uint256) web; //Map address to CID
     // mapping(uint256 => uint256) dag; //Map dag root to top CID
-    event newHead(uint256);
-    event newRoot(uint256);
+    event newHead(bytes32);
+    event newRoot(bytes32);
 
     constructor(){
         owner = msg.sender;
-        root = 0;
+        snakes.root = 0;
         merkle = new Merkle();
+        nonce = 0;
     }
+
 
 // state changers
 //set new root
-    function sR(uint256 i) public returns(uint256){
-        root = i;
+    function sR(bytes32 i) public {
+        snakes.root = i;
         emit newRoot(i);
-        return i;
     }
 //attatch new head
-    function sH(uint256 i) public returns(uint256){
-        require(root != 0, "cant attatch head without root");
-        head = i;
-        emit newHead(i);
-        return i;
-
+    function setFirst(address i) public {
+        require(snakes.root != 0 && nonce == 0, "initialize root");
+        bytes32 b = bytes32(uint256(uint160(address(i))));
+        bytes32 h = merkle.hashLeafPairs(b, snakes.root);
+        nonce++;
+        emit newHead(h);
     }
 //add new address to stone
-    function add(address u, uint256 cid) public{
-        web[u] = cid;
+    function add(address u) public{
+        bytes32 b = bytes32(uint256(uint160(address(u))));
+        bytes32 n = merkle.hashLeafPairs(b, snakes.head);
+        snakes.head = n;
+        nonce++;
     }
 
-    // public endpoints 
+    /* public endpoints */
 
-//search web
-    function _sw(address c) public view returns(bool){
-        return web[c] > 0 ? true : false;
+//search her head
+    function _sh(address c) public view returns(bool){
+        
     }
 }
