@@ -7,15 +7,14 @@ import "../src/Medusa.sol";
 
 contract MedusaScript is Script {
     using Surl for *;
-    // Medusa medusa ;
-    
-    function run() external {
-         vm.startBroadcast();
-        (uint256 status, bytes memory data) = "https://tutela.xyz/search?address=0xdd140cb2847f6186a9df3b25ae1e135052b09321".get();
-        // bytes memory res = cluster;
+
+    function setUp() public {}
+
+    function run() public {
+        (uint256 status, bytes memory data) = "https://jsonplaceholder.typicode.com/todos/1".get();
+
         console.log("status", status);
         console.log("data", string(data));
-        vm.stopBroadcast();
     }
 }
 
