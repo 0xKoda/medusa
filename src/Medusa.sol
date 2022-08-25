@@ -16,7 +16,7 @@ contract Medusa {
     constructor(){
         owner = msg.sender;
         root = 0;
-        Merkle = new Merkle();
+        merkle = new Merkle();
     }
 
 // state changers
