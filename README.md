@@ -1,6 +1,6 @@
 <img align="right" width="150" height="150" top="100" src="medusa.jpg">
 
-# Medusa [WIP]• 
+# Medusa • [WIP]
 
 Beware the UnVirtuous wallets that dare pass her gaze.
 
