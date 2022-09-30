@@ -1,12 +1,21 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "forge-std/Script.sol";
+import {Script, console} from "forge-std/Script.sol";
+import {Surl} from "surl/Surl.sol";
+import "../src/Medusa.sol";
 
-contract ContractScript is Script {
+contract MedusaScript is Script {
+    using Surl for *;
+
     function setUp() public {}
 
     function run() public {
-        vm.broadcast();
+        (uint256 status, bytes memory data) = "https://jsonplaceholder.typicode.com/todos/1".get();
+
+        console.log("status", status);
+        console.log("data", string(data));
     }
 }
+
+
